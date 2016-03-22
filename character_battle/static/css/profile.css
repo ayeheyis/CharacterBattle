@@ -1,0 +1,21 @@
+.scroll-boxes {
+overflow:auto;
+}
+
+.bg-color {
+background-color: #00CC33;
+}
+
+.img-bg-color {
+height:150px;
+background-color: white;
+}
+
+.img-bg-color {
+width:100%;
+background-color: white;
+}
+
+.hd-bg {
+color: white;
+}

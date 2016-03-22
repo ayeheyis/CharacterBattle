@@ -1,0 +1,40 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Profile Page {% endblock %}
+
+{% block profile_active %}active{% endblock %}
+
+{% block stylesheet_includes %}
+<link href="/static/css/profile.css" rel="stylesheet">
+{% endblock %}
+
+{% block script_includes %}
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script src="/static/js/bower_components/bounce.js/bounce.min.js"></script>
+    <script src="/static/js/user_profile.js"></script>
+{% endblock %}
+
+{% block content %}
+<br> <br>
+<div class="container">
+        {% for char in chars %}
+        <div class="col-md-4">
+            <div class="panel panel-success">
+            <div class="panel-heading">
+                <a href="{% url 'char_profile' char.pk %}">
+                    <img id="{{char.pk}}" value="{{char.pk}}" class="img-rounded img-bg-color" style="height: 200px;" src="{{ char.image }}" >
+                </a>
+            </div>
+            <div class="panel-body">
+                <h2>{{ char.name }}({{ char.rating }})</h2>
+                <p class="scroll-boxes">{{ char.description }}</p>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

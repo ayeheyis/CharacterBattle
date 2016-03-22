@@ -1,0 +1,71 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Profile Page {% endblock %}
+
+{% block profile_active %}active{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        {% if user_profile %}
+        <a href="{{prev}}" class="btn btn-primary">Previous</a>
+        <a href="{{next}}" class="btn btn-primary pull-right">Next</a>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-5">
+                <img class="img-responsive" src="media/{{ character.image }}">
+            </div>
+            <div class="col-md-7">
+                <div class="panel panel-default responsive">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">{{character.name}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                                <td> Owner </td>
+                                <td> {{ character.owner.username }}</td>
+                            </tr>
+                            <tr>
+                                <td>Created</td>
+                                <td> {{character.created}}</td>
+                            </tr>
+                            <tr>
+                                <td>Rating</td>
+                                <td> {{character.rating}}</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td> {{character.description}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="text-center">Attributes</h2>
+        <div class="row">
+            {% for attribute in attributes %}
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <h5 class="text-center">
+                        {{ attribute.title }}({{ attribute.rating }})
+                    </h5>
+                    {% if attribute.image %}
+                    <img src="/attr_media/{{ attribute.pk }}" >
+                    {% endif %}
+                    <div class="caption">
+                        <p>{{ attribute.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

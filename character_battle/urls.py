@@ -1,0 +1,37 @@
+from django.conf.urls import url
+from character_battle.views import *
+from character_battle.challenge_view import *
+
+urlpatterns = [
+    url(r'^register$', register, name="register"),
+    url(r'^login$', 'django.contrib.auth.views.login', {'template_name':'login.html'}, name="login"),
+    url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name='logout'),
+    url(r'^choose/(?P<char_id>\d+)$', choose, name="choose"),
+    url(r'^pick$', pick, name="pick"),
+    url(r'^challenge$', challenge, name="challenge"),
+    url(r'^challenging$', challenging, name="challenging"),
+    url(r'^challenger$', challenger, name="challenger"),
+    url(r'^accept/(?P<id>\d+)$', accept, name="accept"),
+    url(r'^decline/(?P<id>\d+)$', decline, name="decline"),
+    url(r'^battles$', battles, name="battles"),
+    url(r'^stats$', stats, name="stats"),
+    url(r'^char_dropdown$', char_dropdown, name="char_dropdown"),
+    url(r'^char_display$', char_display, name="char_display"),
+    url(r'^save_attr$', save_attr, name="save_attr"),
+    url(r'^attr_media/(?P<id>\d+)$', attr_media, name="attr_media"),
+    url(r'^char_media/(?P<id>\d+)$', char_media, name="char_media"),
+    url(r'^profile/(?P<id>\d+)$', profile, name="profile"),
+    url(r'^char_profile/(?P<id>\d+)$', char_profile, name="char_profile"),
+    url(r'^$', home, name="home"),
+    url(r'^create_character$', create_character, name="create"),
+    url(r'^edit_character/(?P<index>\d+)$', edit_character, name="edit"),
+    url(r'^save_new_character$', save_new_character, name="save"),
+    url(r'^update_character/(?P<id>\d+)$', update_character, name="update"),
+    url(r'^ranking$', ranking, name="ranking"),
+    url(r'^ranking_sort$', ranking_sort, name="ranking_sort"),
+    url(r'^battle$', battle, name="battle"),
+    url(r'^write_battle$', write, name="write"),
+    url(r'^submit_battle$', submit_battle, name="submit_battle"),
+    url(r'^vote$', vote, name="vote"),
+    url(r'^history$', history, name="history"),
+]

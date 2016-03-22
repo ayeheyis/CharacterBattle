@@ -1,0 +1,16 @@
+{% extends "base_one.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Sign In {% endblock %}
+
+{% block content %}
+<form class="form-signin" action="{% url 'django.contrib.auth.views.login' %}" method="POST">
+  {% csrf_token %}
+  <h2 class="form-signin-heading">Please Sign In</h2>
+  {{ form|bootstrap }}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <br>
+  <p> Don't have an account? <a href="{% url 'register' %}">Sign Up</a>
+</form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Battle Page {% endblock %}
+
+{% block battle_active %}active{% endblock %}
+
+{% block stylesheet_includes %}
+<link href="/static/css/dashboard.css" rel="stylesheet">
+<link href="/static/css/simple-sidebar.css" rel="stylesheet">
+{% endblock %}
+
+{% block script_includes %}
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script src="/static/js/central.js"></script>
+    <script src="/static/js/bower_components/bounce.js/bounce.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand"></li>
+        <li> <h3 class="text-center">Battle Central</h3> <li>
+        <li><a id="challenging" href="#">Challenged who</a></li>
+        <li><a id="challenger" href="#">Challenged by</a></li>
+        <li><a id="battles" href="#">Battles</a></li>
+        <li>
+          <h5 class="text-center"> Search for user <h5>
+          <input id="search" name="username" type="text" class="form-control" placeholder="username">
+        </li>
+      </ul>
+    </div>
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+          <div class="row">
+              <a href="#menu-toggle" class="center-block btn btn-default" id="menu-toggle">Toggle Menu</a>
+              <div class="col-lg-12 main">
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

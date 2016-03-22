@@ -1,0 +1,68 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block ranking_active %}active{% endblock %}
+
+{% block stylesheet_includes %}
+    <link href="static/css/style.css" rel="stylesheet">
+{% endblock %}
+{% block script_includes %}
+    <script src="static/js/jquery-1.11.3.min.js"></script>
+    <script src="static/js/ranking.js"></script>
+{% endblock %}
+{% block content %}
+<div>
+	<h1>Rankings</h1>
+</div>
+<form method="POST" action="">
+	<div class="input-group">
+		{% for field in form.visible_fields %}{{field}}
+
+		<span class="input-group-btn"><button id="ranking-search-btn" class="btn btn-success" type="submit">Search</button></span>
+		<form method="POST" action="">
+		
+		<div class="input-group"><span class="input-group-btn"><button id="ranking-search-btn" class="btn btn-info" type="submit">Display All</button></span>
+		</div>
+
+		{% endfor %}
+		{% for field in form.hidden_fields %}
+		{{field}}
+		{% endfor %}
+
+		{% csrf_token %}
+	</div>
+</form>
+<div>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th id="name-sort">
+				Character Name
+				<span id="name-sort-icon" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</th>
+				<th id="owner-sort">
+				Owner
+				<span id="owner-sort-icon" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</th>
+				<th id="rating-sort">
+				Character Rating
+				<span id="rating-sort-icon" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</th>
+			</tr>
+		</thead>
+		<tbody id="character-table-body">
+			{% for char in characters %}
+			<tr>
+				<td><a href="{% url 'char_profile' char.pk %}">{{ char.name }}</a></td>
+				<td>{{ char.owner }}</td>
+				<td>{{ char.rating }}</td>
+			</tr>
+			{% endfor %}
+		<tbody>
+	</table>
+</div>
+{% endblock %}

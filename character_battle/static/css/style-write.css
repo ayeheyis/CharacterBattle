@@ -1,0 +1,12 @@
+body {
+	background-color: white;
+}
+
+#basic-toolbar {
+	border: 1px solid black;
+	box-shadow: -3px -3px 2px #d9d9d9;
+}
+
+#basic-editor {
+	border: 1px solid black;
+}

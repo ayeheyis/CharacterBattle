@@ -1,0 +1,17 @@
+{% extends 'base_one.html' %}
+
+{% block authed_navbar %}
+<div id="navbar-content" class="collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li class="{% block create_active %}{% endblock %}"><a href="{% url 'edit' 0%}">Edit</a></li>
+    <li class="{% block ranking_active %}{% endblock %}"><a href="{% url 'ranking' %}">Rankings</a></li>
+    <li class="{% block battle_active %}{% endblock %}"><a href="{% url 'battle' %}">Battle!</a></li>
+    <li class="{% block vote_active %}{% endblock %}"><a href="{% url 'vote' %}">Vote</a></li>
+    <li class="{% block history_active %}{% endblock %}"><a href="{% url 'history' %}">History</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="{% block profile_active %}{% endblock %}"><a href="{% url 'profile' user.pk%}">Profile ({{user.username}})</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Vote Page {% endblock %}
+
+{% block vote_active %}active{% endblock %}
+
+{% block stylesheet_includes %}
+	<link href="static/css/vote.css" rel="stylesheet">
+{% endblock %}
+{% block script_includes %}
+	<script src="static/js/jquery-1.11.3.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
+	<script src="static/js/vote.js"></script>
+{% endblock %}
+{% block content %}
+<div>
+	<h1>Current Available Battles to Vote</h1>
+</div>
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>vs.</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for battle in current_battles %}
+			<tr>
+				<td>{{ battle.pk }}</td>
+				<td>{{ battle.character1.name }} vs. {{ battle.character2.name }}</td>
+				<td>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".current-battle-modal-{{ battle.pk }}">
+					View Battle
+					</button>
+
+					<div class="modal fade current-battle-modal-{{ battle.pk }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">x</span>
+									</button>
+									<h4 class="modal-title">{{ battle.character1.name }} vs. {{ battle.character2.name }}</h4>
+								</div>
+							<div class="modal-body">
+							<!-- Arguments go here -->
+								<div class="row">
+									<div class="col-md-6">
+									<img class="vote-image" src="{{ battle.character1.image}}" />
+									<h5>{{ battle.character1.name}}'s Argument</h5>
+									{% autoescape off %}
+									{{ battle.argument1 }}
+									{% endautoescape %}
+									</div>
+
+									<div class="col-md-6">
+									<img class="vote-image" src="{{ battle.character2.image}}" />
+									<h5>{{ battle.character2.name}}'s Argument</h5>
+									{% autoescape off %}
+									{{ battle.argument2 }}
+									{% endautoescape %}
+									</div>
+
+								</div>
+							</div><!-- modal-body -->
+							<div class="modal-footer">
+								<button type="button" id="{{battle.pk}}-{{battle.character1.pk}}" class="btn btn-default pull-left submit-vote" data-dismiss="modal">Vote for {{ battle.character1.name }}</button>
+								<button type="button" id="{{battle.pk}}-{{battle.character2.pk}}" class="btn btn-default submit-vote" data-dismiss="modal">Vote for {{ battle.character2.name }}</button>
+							</div>
+						</div><!-- modal-content -->
+					  </div>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<h1>Already Voted</h1>
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>vs.</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for battle in voted_battles %}
+			<tr>
+				<td>{{ battle.pk }}</td>
+				<td>{{ battle.character1.name }} vs. {{ battle.character2.name }}</td>
+				<td>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".voted-battle-modal-{{ battle.pk }}">
+					View Battle
+					</button>
+
+					<div class="modal fade voted-battle-modal-{{ battle.pk }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">x</span>
+									</button>
+									<h4 class="modal-title">{{ battle.character1.name }} vs. {{ battle.character2.name }}
+									{% if battle.complete %}
+									 (Winner: {% if battle.votes1 > battle.votes2 %} {{battle.character1.name}}{% else %} {{battle.character2.name}}{% endif %})
+									{% else %}
+									 (Ongoing)
+									{% endif %}
+									</h4>
+								</div>
+							<div class="modal-body">
+							<!-- Arguments go here -->
+								<div class="row">
+									<div class="col-md-6">
+									<img class="vote-image" src="{{ battle.character1.image}}" />
+									<h5>{{ battle.character1.name}}'s Argument ({{ battle.votes1 }} votes)</h5>
+									{% autoescape off %}
+									{{ battle.argument1 }}
+									{% endautoescape %}
+									</div>
+
+									<div class="col-md-6">
+									<img class="vote-image" src="{{ battle.character2.image}}" />
+									<h5>{{ battle.character2.name}}'s Argument ({{ battle.votes2 }} votes)</h5>
+									{% autoescape off %}
+									{{ battle.argument2 }}
+									{% endautoescape %}
+									</div>
+
+								</div>
+							</div><!-- modal-body -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div><!-- modal-content -->
+					  </div>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

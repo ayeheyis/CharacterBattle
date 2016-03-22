@@ -1,0 +1,45 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Choose {% endblock %}
+
+{% block script_includes %}
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script src="/static/js/bower_components/bounce.js/bounce.min.js"></script>
+    <script src="/static/js/attributes.js"></script>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <h1 align="center" >Pick 3 of the 5 attributes</h1>
+    <br>
+    <div class="row">
+        <div id="choose" class="col-md-3">
+            <ul class="list-group">
+                {% for attribute in attributes %}
+                    <button type="button" class="text-center btn-lg btn-info btn-block options" id="{{char_id}}" value="{{ attribute.id }}">
+                        {{attribute.title}}
+                    </button>
+                {% endfor %}
+            </ul>
+            <div id="save_form">
+                <input type="hidden" id="char_id" value="{{char_id}}">
+                <button id="save" type="submit" class="btn btn-success btn-lg btn-block">Save</button>
+            </div>
+        </div>
+        {% for option in picked %}
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <h2 class="text-center">
+                        {{ option.title }}({{ option.rating }})
+                    </h2>
+                    <img src="/attr_media/{{ option.pk }}" >
+                    <div class="caption">
+                        <p>{{ option.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

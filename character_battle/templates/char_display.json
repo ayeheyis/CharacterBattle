@@ -1,0 +1,7 @@
+{
+	"characters":[
+	{% for character in characters %}
+		{ "html":"{{character.display_html|safe}}" }
+		{% if not forloop.last %},{% endif %}
+	{% endfor %}]
+}

@@ -1,0 +1,13 @@
+{% extends 'base_authed.html' %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+    <h1>Welcome to Character Battle!</h1>
+    <p>
+    This is a draw-and-argue sort of thing where users can create drawings of characters, add descriptions, and challenge other users' characters to narrative battles. Once initiating a battle with another character and the user accepts, you'll be able to write a narrative argument supporting your character. Other users will then be able to vote on which argument is better! The winner gets an increase to their ranking!
+    </p>
+    <a class="btn btn-info" href="{% url 'create' %}">Create a new character.</a>
+{% endblock %}

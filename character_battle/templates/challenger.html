@@ -1,0 +1,35 @@
+<div class='row option thumbnail'>
+<div class='col-md-4'>
+  <div class='panel panel-success'>
+  <div class='panel-heading'>
+    <h2 class='text-center'>
+        {{ challenge.challenger }}
+    </h2>
+  </div>
+  <div class='panel-body'>
+    <a href='{% url "char_profile" challenge.challenger.pk %}'>
+      <img class='img-rounded' src='{{ challenge.challenger.image }}' style='height: 200px;width:100%;'>
+    </a>
+  </div>
+</div>
+</div>
+<div class='col-md-4'>
+<br> <br> <br> <br> <br>
+  <button id='accept' value='{{challenge.pk}}' class='btn btn-success center-block btn-block'>Accept</button>
+  <button id='decline' value='{{challenge.pk}}' class='btn btn-danger center-block btn-block'>Decline</button>
+</div>
+<div class='col-md-4'>
+  <div id='{{challenge.challenger.pk}}' class='panel panel-warning'>
+  <div class='panel-heading'>
+    <h2 class='text-center'>
+        {{ challenge.challenging }}
+    </h2>
+  </div>
+  <div class='panel-body'>
+    <a href='{% url "char_profile" challenge.challenging.pk %}'>
+      <img class='img-rounded' src='{{ challenge.challenging.image }}' style='height: 200px;width:100%;'>
+    </a>
+  </div>
+</div>
+</div>
+</div>

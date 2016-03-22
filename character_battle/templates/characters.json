@@ -1,0 +1,1 @@
+{"characters":[{% for character in characters %}{%spaceless%}{% include 'character.json' %}{%endspaceless%}{% if not forloop.last %}, {% endif %}{% endfor %}]}

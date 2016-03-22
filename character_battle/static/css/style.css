@@ -1,0 +1,8 @@
+#id_search_text {
+	width: 100%;
+	border: none;
+}
+
+#id_search_text:focus {
+	outline: 0;
+}
